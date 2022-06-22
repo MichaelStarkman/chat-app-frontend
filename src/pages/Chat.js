@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  Row, Col, Container
-} from 'react-bootstrap';
+import {Row, Col, Container} from 'react-bootstrap';
 import MessageForm from '../Components/MessageForm';
 import Sidebar from '../Components/Sidebar';
 
