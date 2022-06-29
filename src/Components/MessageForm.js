@@ -7,6 +7,7 @@ function MessageForm() {
     const [message, setMessage] = useState("");
     const user = useSelector((state) => state.user);
     const { socket, currentRoom, setMessages, messages, privateMemberMsg } = useContext(AppContext);
+    // ScrollToBottom function everytime message is sent 
     const messageEndRef = useRef(null);
     useEffect(() => {
         scrollToBottom();
@@ -24,12 +25,13 @@ function MessageForm() {
 
         return month + "/" + day + "/" + year;
     }
-
+    // handle submit function
     function handleSubmit(e) {
         e.preventDefault();
     }
-
+    // scroll to bottom function 
     function scrollToBottom() {
+        // takes message and references it, and if there is a current message window will scroll into view
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
 
@@ -52,27 +54,34 @@ function MessageForm() {
     return (
         <>
             <div className="messages-output">
+                {/* display user is in chatroom, when not in private message */}
                 {user && !privateMemberMsg?._id && <div className="alert alert-info">You are in the {currentRoom} room</div>}
+                {/* display user is in privating message with other user  */}
                 {user && privateMemberMsg?._id && (
                     <>
                         <div className="alert alert-info conversation-info">
                             <div>
-                                Your conversation with {privateMemberMsg.name} <img src={privateMemberMsg.picture} className="conversation-profile-pic" />
+                            <img src={privateMemberMsg.picture} className="conversation-profile-pic"></img> 
+                            
+                            Your conversation with {privateMemberMsg.name}
                             </div>
                         </div>
                     </>
                 )}
                 {!user && <div className="alert alert-danger">Please login</div>}
-
+                {/*  */}
                 {user &&
                     messages.map(({ _id: date, messagesByDate }, idx) => (
                         <div key={idx}>
                             <p className="alert alert-info text-center message-date-indicator">{date}</p>
                             {messagesByDate?.map(({ content, time, from: sender }, msgIdx) => (
+                                // differentiate between incoming messages and user messages
+                                // if there is a sender email matches user email display class "message", but if is it doesn't then display class "incoming message"
                                 <div className={sender?.email == user?.email ? "message" : "incoming-message"} key={msgIdx}>
                                     <div className="message-inner">
                                         <div className="d-flex align-items-center mb-3">
-                                            <img src={sender.picture} style={{ width: 35, height: 35, objectFit: "cover", borderRadius: "50%", marginRight: 10 }} />
+                                            <img src={sender.picture} style={{ width: 30, height: 30, objectFit: "cover", borderRadius: "50%", marginRight: 10 }} />
+                                            <br></br>
                                             <p className="message-sender">{sender._id == user?._id ? "You" : sender.name}</p>
                                         </div>
                                         <p className="message-content">{content}</p>

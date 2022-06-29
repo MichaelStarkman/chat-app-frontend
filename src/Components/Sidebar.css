@@ -9,15 +9,18 @@
     margin-bottom: 0;
     position: relative;
 }
-
+/* TODO not displaying */
 .sidebar-online-status {
     color: green;
+    width: 10px;
+    height: 10px;
 }
+/* TODO not displaying */
 
 .sidebar-offline-status {
     color: #e3b505;
 }
-
+/* TODO not displaying */
 .sidebar-offline-status,
 .sidebar-online-status {
     font-size: 11px;

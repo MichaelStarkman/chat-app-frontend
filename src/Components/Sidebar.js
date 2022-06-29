@@ -3,7 +3,7 @@ import { Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../context/appContext";
 import { addNotifications, resetNotifications } from "../features/userSlice";
-// import "./Sidebar.css";
+import "./Sidebar.css";
 
 function Sidebar() {
     const user = useSelector((state) => state.user);
@@ -23,7 +23,7 @@ function Sidebar() {
         // dispatch for notifications
         dispatch(resetNotifications(room));
     }
-
+    // Only display notifications if room does not equal currentRoom
     socket.off("notifications").on("notifications", (room) => {
         if (currentRoom != room) dispatch(addNotifications(room));
     });
@@ -79,8 +79,14 @@ function Sidebar() {
                 <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id == member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id}>
                     <Row>
                         <Col xs={2} className="member-status">
-                            <img src={member.picture} className="member-status-img" style={{ width: "25px", height: "25px"}}/>
-                            {member.status == "online" ? <i className="fas fa-circle sidebar-online-status"></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
+                            <img src={member.picture} className="member-status-img" 
+                            // style={{ width: "25px", height: "25px"}}
+                            />
+                            {/* TODO fix online icons */}
+                            {member.status == "online" ? 
+                            <i className="fas fa-circle sidebar-online-status"></i> 
+                            : 
+                            <i className="fas fa-circle sidebar-offline-status"></i>}
                         </Col>
                         <Col xs={9}>
                             {member.name}
