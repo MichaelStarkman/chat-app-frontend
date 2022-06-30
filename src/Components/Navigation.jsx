@@ -34,9 +34,9 @@ const Navigation = () => {
                         <Nav.Link>Login</Nav.Link>               
                     </LinkContainer>
                 )}
-                <LinkContainer to="/chat">
+                {/* <LinkContainer to="/chat">
                     <Nav.Link>Chat</Nav.Link>               
-                </LinkContainer>         
+                </LinkContainer>          */}
                 {user && (
                             <NavDropdown
                                 title={
@@ -47,10 +47,16 @@ const Navigation = () => {
                                 }
                                 id="basic-nav-dropdown"
                             >
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-
+                                <NavDropdown.Item> 
+                                    <LinkContainer to="/">
+                                        <Nav.Link>Home</Nav.Link>               
+                                    </LinkContainer> 
+                                </NavDropdown.Item>
+                                <NavDropdown.Item> 
+                                    <LinkContainer to="/chat">
+                                        <Nav.Link>Chat</Nav.Link>               
+                                    </LinkContainer> 
+                                </NavDropdown.Item>
                                 <NavDropdown.Item>
                                     <Button variant="danger" onClick={handleLogout}>
                                         Logout

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { AppContext } from "../context/appContext";
+import sendIcon from '../assets/send-icon.png'
 import "./MessageForm.css";
 function MessageForm() {
     const [message, setMessage] = useState("");
@@ -95,14 +96,14 @@ function MessageForm() {
             </div>
             <Form onSubmit={handleSubmit}>
                 <Row>
-                    <Col md={11}>
+                    <Col md={10}>
                         <Form.Group>
                             <Form.Control type="text" placeholder="Your message" disabled={!user} value={message} onChange={(e) => setMessage(e.target.value)}></Form.Control>
                         </Form.Group>
                     </Col>
-                    <Col md={1}>
-                        <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "orange" }} disabled={!user}>
-                            <i className="fas fa-paper-plane"></i>
+                    <Col md={2}>
+                        <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "orange", fontWeight: "800"}} disabled={!user}>
+                           SEND
                         </Button>
                     </Col>
                 </Row>
