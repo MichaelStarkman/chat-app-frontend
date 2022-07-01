@@ -13,7 +13,8 @@ const Home = () => {
           <p>Chat app lets you connect with the world</p>
           <LinkContainer to="/chat">
             <Button variant='success'>
-              Get started <i className="fas fa-comments home-message-icon"></i></Button>
+              Get started <i className="fas fa-comments home-message-icon"></i>
+            </Button>
           </LinkContainer>
         </div>
       </Col>

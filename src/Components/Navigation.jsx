@@ -21,9 +21,10 @@ const Navigation = () => {
     return (    
         <Navbar bg="light" expand="lg">
         <Container>
-            <LinkContainer to="/">
+            <LinkContainer style={{ display: "flex"}} to="/">
                 <Navbar.Brand >
                     <img src={logo} style={{ width: 50, height: 50}}/>
+                    <p>StarkChat</p>
                 </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
