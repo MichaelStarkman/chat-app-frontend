@@ -3,7 +3,7 @@ import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import { useSignupUserMutation } from "../services/appApi";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
-import botImg from "../assets/profile-pic.png";
+import dogImg from "../assets/profilepic.jpg";
 
 function Signup() {
     const [email, setEmail] = useState("");
@@ -64,9 +64,9 @@ function Signup() {
             <Row>
                 <Col md={7} className="d-flex align-items-center justify-content-center flex-direction-column">
                     <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
-                        <h1 className="text-center">Create account</h1>
+                        <h1 className="text-center">Create Account</h1>
                         <div className="signup-profile-pic__container">
-                            <img src={imagePreview || botImg} className="signup-profile-pic" />
+                            <img src={imagePreview || dogImg} className="signup-profile-pic" />
                             <label htmlFor="image-upload" className="image-upload-label">
                                 <i className="fas fa-plus-circle add-picture-icon"></i>
                             </label>
@@ -74,17 +74,17 @@ function Signup() {
                         </div>
                         {error && <p className="alert alert-danger">{error.data}</p>}
                         <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Name:</Form.Label>
                             <Form.Control type="text" placeholder="Your name" onChange={(e) => setName(e.target.value)} value={name} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>Email address:</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
                             <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
                         </Form.Group>
                         <Button variant="primary" type="submit">

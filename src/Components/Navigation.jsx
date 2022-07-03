@@ -24,9 +24,9 @@ const Navigation = () => {
             <LinkContainer style={{ display: "flex"}} to="/">
                 <Navbar.Brand >
                     <img src={logo} style={{ width: 50, height: 50}}/>
-                    <p>StarkChat</p>
                 </Navbar.Brand>
             </LinkContainer>
+            <Navbar.Brand>STARKCHAT</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -35,9 +35,6 @@ const Navigation = () => {
                         <Nav.Link>Login</Nav.Link>               
                     </LinkContainer>
                 )}
-                {/* <LinkContainer to="/chat">
-                    <Nav.Link>Chat</Nav.Link>               
-                </LinkContainer>          */}
                 {user && (
                             <NavDropdown
                                 title={
