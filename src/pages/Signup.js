@@ -6,15 +6,18 @@ import "./Signup.css";
 import dogImg from "../assets/profilepic.jpg";
 
 function Signup() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
     const [signupUser, { isLoading, error }] = useSignupUserMutation();
     const navigate = useNavigate();
     //image upload states
+    // no image by default
     const [image, setImage] = useState(null);
-    const [upladingImg, setUploadingImg] = useState(false);
+    const [uploadingImg, setUploadingImg] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
+
+
 
     function validateImg(e) {
         const file = e.target.files[0];
@@ -64,9 +67,10 @@ function Signup() {
             <Row>
                 <Col md={7} className="d-flex align-items-center justify-content-center flex-direction-column">
                     <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
-                        <h1 className="text-center">Create Account</h1>
+                        <h1 className="text-center font-weight-bold">Create Account</h1>
                         <div className="signup-profile-pic__container">
                             <img src={imagePreview || dogImg} className="signup-profile-pic" />
+                            {/* icon to upload image */}
                             <label htmlFor="image-upload" className="image-upload-label">
                                 <i className="fas fa-plus-circle add-picture-icon"></i>
                             </label>
@@ -82,17 +86,16 @@ function Signup() {
                             <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} />
                             <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            {upladingImg || isLoading ? "Signing you up..." : "Signup"}
+                        <Button variant="primary" type="submit" style={{ width: "100%", marginTop: "2vh" }}>
+                            {uploadingImg || isLoading ? "Signing you up!" : "Create Account"}
                         </Button>
-                        <div className="py-4">
+                        <div className="d-flex align-items-center justify-content-center pt-2 border border-secondary mt-5">
                             <p className="text-center">
-                                Already have an account ? <Link to="/login">Login</Link>
+                                Already have an account ? <Link to="/login">Log In</Link>
                             </p>
                         </div>
                     </Form>

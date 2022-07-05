@@ -34,25 +34,26 @@ function Login() {
             <Row>
                 <Col md={5} className="login__bg"></Col>
                 <Col md={7} className="d-flex align-items-center justify-content-center flex-direction-column">
-                    <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleLogin}>
-                        <h1>Log in</h1>
+                    <Form style={{ width: "80%", maxWidth: 500}} onSubmit={handleLogin}>
+                        <h1>Log In</h1>
                         <br />
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             {error && <p className="alert alert-danger">{error.data}</p>}
                             <Form.Label>Email address:</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} value={email} required />
                         </Form.Group>
-                        <br />
+                        
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            {isLoading ? <Spinner animation="grow" /> : "Login"}
+                        
+                        <Button variant="primary" type="submit" style={{ width: "100%", marginTop: "2vh" }}>
+                            {isLoading ? <Spinner animation="grow" /> : "Log In"}
                         </Button>
-                        <div className="py-4">
+                        <div className="d-flex align-items-center justify-content-center pt-2 border border-secondary mt-5">
                             <p className="text-center">
-                                Don't have an account ? <Link to="/signup">Sign up</Link>
+                                Don't have an account ? <Link to="/signup">Sign Up</Link>
                             </p>
                         </div>
                     </Form>

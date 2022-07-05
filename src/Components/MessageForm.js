@@ -96,14 +96,15 @@ function MessageForm() {
             </div>
             <Form onSubmit={handleSubmit}>
                 <Row>
-                    <Col md={10}>
+                    <Col md={11}>
                         <Form.Group>
                             <Form.Control type="text" placeholder="Your message" disabled={!user} value={message} onChange={(e) => setMessage(e.target.value)}></Form.Control>
                         </Form.Group>
                     </Col>
-                    <Col md={2}>
-                        <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "orange", fontWeight: "800"}} disabled={!user}>
-                           SEND
+                    <Col md={1}>
+                        <Button variant="primary" type="submit" style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "orange", height: "40px", width: "100%"}} disabled={!user}>
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+
                         </Button>
                     </Col>
                 </Row>
