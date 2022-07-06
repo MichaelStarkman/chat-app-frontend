@@ -12,6 +12,7 @@ import logo from '../assets/logo.png'
 const Navigation = () => {
     const user = useSelector((state) => state.user);
     const [logoutUser] = useLogoutUserMutation();
+    // Log out function
     async function handleLogout(e) {
         e.preventDefault();
         await logoutUser(user);
@@ -32,14 +33,17 @@ const Navigation = () => {
             <Nav className="ms-auto">
                 {!user && (
                     <LinkContainer to="/login">
-                        <Nav.Link>Login</Nav.Link>               
+                        <Nav.Link>Log In</Nav.Link>               
                     </LinkContainer>
                 )}
                 {user && (
                             <NavDropdown
                                 title={
                                     <>
-                                        <img src={user.picture} style={{ width: 30, height: 30, marginRight: 10, objectFit: "cover", borderRadius: "50%" }} />
+                                        <img 
+                                            src={user.picture} 
+                                            style={{ width: 30, height: 30, marginRight: 10, objectFit: "cover", borderRadius: "50%" }} 
+                                        />
                                         {user.name}
                                     </>
                                 }
@@ -56,7 +60,10 @@ const Navigation = () => {
                                     </LinkContainer> 
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Button variant="danger" onClick={handleLogout}>
+                                    <Button 
+                                        variant="danger" 
+                                        onClick={handleLogout}
+                                    >
                                         Logout
                                     </Button>
                                 </NavDropdown.Item>

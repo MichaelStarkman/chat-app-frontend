@@ -8,6 +8,7 @@ import Chat from "./pages/Chat";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { AppContext, socket } from "./context/appContext";
+import ChatFooterBar from "./Components/ChatFooterBar/ChatFooterBar";
 
 function App() {
     const [rooms, setRooms] = useState([]);
@@ -18,11 +19,12 @@ function App() {
     const [newMessages, setNewMessages] = useState({});
     const user = useSelector((state) => state.user);
     return (
-        <AppContext.Provider value={{ socket, currentRoom, setCurrentRoom, members, setMembers, messages, setMessages, privateMemberMsg, setPrivateMemberMsg, rooms, setRooms, newMessages, setNewMessages }}>
+        <AppContext.Provider value={{ socket, rooms, setRooms, currentRoom, setCurrentRoom, members, setMembers, messages, setMessages, privateMemberMsg, setPrivateMemberMsg, newMessages, setNewMessages }}>
             <BrowserRouter>
                 <Navigation />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    {/* hide if not user */}
                     {!user && (
                         <>
                             <Route path="/login" element={<Login />} />
@@ -31,6 +33,7 @@ function App() {
                     )}
                     <Route path="/chat" element={<Chat />} />
                 </Routes>
+                <ChatFooterBar />
             </BrowserRouter>
         </AppContext.Provider>
     );

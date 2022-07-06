@@ -1,8 +1,9 @@
+// REDUX store
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./features/userSlice";
 import appApi from "./services/appApi";
 
-// persist our store
+// persist store / keep user logged in even after refreshing
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
@@ -17,15 +18,14 @@ const reducer = combineReducers({
 const persistConfig = {
     key: "root",
     storage,
+    // don't persist 
     blackList: [appApi.reducerPath],
 };
 
-// persist our store
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 // creating the store
-
 const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk, appApi.middleware],

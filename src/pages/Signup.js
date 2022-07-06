@@ -12,14 +12,12 @@ function Signup() {
     const [signupUser, { isLoading, error }] = useSignupUserMutation();
     const navigate = useNavigate();
     //image upload states
-    // no image by default
     const [image, setImage] = useState(null);
     const [uploadingImg, setUploadingImg] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
 
-
-
     function validateImg(e) {
+        // limit file size to <1Mb
         const file = e.target.files[0];
         if (file.size >= 1048576) {
             return alert("Max file size is 1mb");
@@ -28,13 +26,14 @@ function Signup() {
             setImagePreview(URL.createObjectURL(file));
         }
     }
-
+// upload image to cloudinary 
     async function uploadImage() {
         const data = new FormData();
         data.append("file", image);
         data.append("upload_preset", "chatApp");
         try {
             setUploadingImg(true);
+            // cloudinary url chat-app-cloud = account name
             let res = await fetch("https://api.cloudinary.com/v1_1/chat-app-cloud/image/upload", {
                 method: "POST",
                 body: data,
@@ -52,11 +51,9 @@ function Signup() {
         e.preventDefault();
         if (!image) return alert("Please upload your profile picture");
         const url = await uploadImage(image);
-        console.log(url);
         // signup the user
         signupUser({ name, email, password, picture: url }).then(({ data }) => {
             if (data) {
-                console.log(data);
                 navigate("/chat");
             }
         });
@@ -69,6 +66,7 @@ function Signup() {
                     <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
                         <h1 className="text-center font-weight-bold">Create Account</h1>
                         <div className="signup-profile-pic__container">
+                            {/* display user image or default image (dogImg) */}
                             <img src={imagePreview || dogImg} className="signup-profile-pic" />
                             {/* icon to upload image */}
                             <label htmlFor="image-upload" className="image-upload-label">

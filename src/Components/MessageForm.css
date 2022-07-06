@@ -1,7 +1,7 @@
 /* Message board window */
 .messages-output {
     height: 80vh;
-    border: 1px solid lightgray;
+    border: 1px solid gray;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
@@ -19,11 +19,11 @@
     font: 400 1em, sans-serif;
     display: inline-block;
     border-radius: 10px;
-    background-color: #d1e7dd;
+    background-color: #64be96;
 }
 /* change background color for incoming messages */
 .incoming-message .message-inner {
-    background-color: #ffdab9;
+    background-color: #fbc28f;
 }
 /* separate messages and incoming messages (move incoming to right side of container */
 .incoming-message {
@@ -44,7 +44,7 @@
 }
 /* date (not inlcuded in message) */
 .message-date-indicator {
-    width: 150px;
+    width: 115px;
     margin: 0 auto;
 }
 /* private message banner */

@@ -16,12 +16,14 @@ function Login() {
     const navigate = useNavigate();
     const { socket } = useContext(AppContext);
     const [loginUser, { isLoading, error }] = useLoginUserMutation();
+
+
     function handleLogin(e) {
         e.preventDefault();
         // login logic
         loginUser({ email, password }).then(({ data }) => {
             if (data) {
-                // socket work
+                // socket work here
                 socket.emit("new-user");
                 // navigate to the chat
                 navigate("/chat");

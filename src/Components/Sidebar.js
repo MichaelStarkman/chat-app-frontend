@@ -8,11 +8,11 @@ import "./Sidebar.css";
 function Sidebar() {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    const { socket, setMembers, members, setCurrentRoom, setRooms, privateMemberMsg, rooms, setPrivateMemberMsg, currentRoom } = useContext(AppContext);
+    const { socket, members, setMembers, currentRoom, setCurrentRoom, rooms, setRooms, privateMemberMsg, setPrivateMemberMsg } = useContext(AppContext);
 
     function joinRoom(room, isPublic = true) {
         if (!user) {
-            return alert("Please login");
+            return alert("Please Log In");
         }
         socket.emit("join-room", room, currentRoom);
         setCurrentRoom(room);
@@ -27,7 +27,7 @@ function Sidebar() {
     socket.off("notifications").on("notifications", (room) => {
         if (currentRoom != room) dispatch(addNotifications(room));
     });
-
+    // join general room by default
     useEffect(() => {
         if (user) {
             setCurrentRoom("general");
@@ -46,7 +46,7 @@ function Sidebar() {
             .then((res) => res.json())
             .then((data) => setRooms(data));
     }
-
+// Private Messaging 
     function orderIds(id1, id2) {
         if (id1 > id2) {
             return id1 + "-" + id2;
@@ -58,6 +58,7 @@ function Sidebar() {
     function handlePrivateMemberMsg(member) {
         setPrivateMemberMsg(member);
         const roomId = orderIds(user._id, member._id);
+        // private room, isPublic = false
         joinRoom(roomId, false);
     }
 
@@ -66,23 +67,34 @@ function Sidebar() {
     }
     return (
         <>
-            <h2 style={{ margin: "15px" }}>Available rooms &#128682;</h2>
+            {/* Rooms */}
+            <h2 style={{ margin: "15px" }}>Available Rooms &#128682;</h2>
             <ListGroup>
                 {rooms.map((room, idx) => (
-                    <ListGroup.Item key={idx} onClick={() => joinRoom(room)} active={room == currentRoom} style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}>
+                    <ListGroup.Item 
+                        key={idx} 
+                        onClick={() => joinRoom(room)} 
+                        active={room == currentRoom} 
+                        style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}
+                    >
                         {room} {currentRoom !== room && <span className="badge rounded-pill bg-primary">{user.newMessages[room]}</span>}
                     </ListGroup.Item>
                 ))}
             </ListGroup>
+            {/* Members */}
             <h2 style={{ margin: "15px" }}>Members &#128101;</h2>
             {members.map((member) => (
-                <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id == member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id}>
+                <ListGroup.Item 
+                    key={member.id} 
+                    style={{ cursor: "pointer" }} 
+                    active={privateMemberMsg?._id == member?._id} 
+                    onClick={() => handlePrivateMemberMsg(member)} 
+                    // can't send message to yourself 
+                    disabled={member._id === user._id}
+                >
                     <Row>
                         <Col xs={2} className="member-status">
-                            <img src={member.picture} className="member-status-img" 
-                            // style={{ width: "25px", height: "25px"}}
-                            />
-                            {/* TODO fix online icons */}
+                            <img src={member.picture} className="member-status-img" />
                             {member.status == "online" ? 
                             <i className="fas fa-circle sidebar-online-status"></i> 
                             : 
