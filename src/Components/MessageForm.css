@@ -31,7 +31,7 @@
     justify-content: flex-end;
     margin-right: 20px;
 }
-/* timestamp  */
+/* timestamp (included in message) */
 .message-timestamp-left {
     font-size: 0.85em;
     font-weight: 300;

@@ -9,7 +9,7 @@ function MessageForm() {
     const [message, setMessage] = useState("");
     const user = useSelector((state) => state.user);
     const { socket, currentRoom, messages, setMessages, privateMemberMsg } = useContext(AppContext);
-    // ScrollToBottom function everytime message is sent 
+    // ScrollToBottom everytime message is sent 
     const messageEndRef = useRef(null);
     useEffect(() => {
         scrollToBottom();
@@ -58,14 +58,13 @@ function MessageForm() {
         <>
             <div className="messages-output">
                 {/* display user is in chatroom, when not in private message */}
-                {user && !privateMemberMsg?._id && <div className="alert alert-primary">You are in the {currentRoom} room</div>}
+                {user && !privateMemberMsg?._id && <div className="alert alert-primary">You are in the {currentRoom} Room</div>}
                 {/* display user is in privating message with other user  */}
                 {user && privateMemberMsg?._id && (
                     <>
                         <div className="alert alert-primary conversation-info">
                             <div>
                             <img src={privateMemberMsg.picture} className="conversation-profile-pic"></img> 
-                            
                             Your conversation with {privateMemberMsg.name}
                             </div>
                         </div>
