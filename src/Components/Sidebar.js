@@ -95,7 +95,7 @@ function Sidebar() {
                     <Row>
                         <Col xs={2} className="member-status">
                             <img src={member.picture} className="member-status-img" />
-                            {member.status == "online" ? 
+                            {member.status == 'online' ? 
                             <i className="fas fa-circle sidebar-online-status"></i> 
                             : 
                             <i className="fas fa-circle sidebar-offline-status"></i>}
@@ -103,7 +103,7 @@ function Sidebar() {
                         <Col xs={9}>
                             {member.name}
                             {member._id === user?._id && " (You)"}
-                            {member.status == "offline" && " (Offline)"}
+                            {member.status == "offline" && " (offline)"}
                         </Col>
                         <Col xs={1}>
                             <span className="badge rounded-pill bg-primary">{user.newMessages[orderIds(member._id, user._id)]}</span>
