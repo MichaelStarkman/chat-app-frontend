@@ -30,8 +30,8 @@ MODELS
         picture: String,
         newMessages: Object,
         status: String
-
-   Messages
+ 
+    Messages
         content: String,
         from: Object,
         socketid: String,
