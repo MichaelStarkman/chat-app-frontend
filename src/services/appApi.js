@@ -5,7 +5,7 @@ const appApi = createApi({
     reducerPath: "appApi",
     baseQuery: fetchBaseQuery({
         // Back-end url
-        baseUrl: "http://localhost:5001",
+        baseUrl: "https://c-app-backend.herokuapp.com",
     }),
 
     endpoints: (builder) => ({
