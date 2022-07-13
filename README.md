@@ -1,7 +1,6 @@
 TITLE: StarkChat App
 
-Front-end Link: 
-Back-end Link:
+https://c-app.herokuapp.com/
 
 DESCRIPTION 
 
